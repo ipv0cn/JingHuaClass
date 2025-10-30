@@ -75,7 +75,7 @@ class User:
         )
         return response.json()
 
-    def quick_response(self, courseId: int) -> Dict[str, str]:
+    def quick_response(self, courseId: int) -> str:
         """
         Response: {
             'msg': '抢答成功！'
@@ -85,7 +85,7 @@ class User:
             f"{self.jinghua_url}/wechat-api/v1/responders",
             data={"courseId": courseId}
         )
-        return response.json()
+        return response.text
 
     def get_user_info(self) -> List[Dict[str, str | int]]:
         """
