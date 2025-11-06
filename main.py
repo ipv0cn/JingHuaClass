@@ -54,10 +54,9 @@ if __name__ == "__main__":
             break
 
     while True:
-        # TODO: args=(user.quick_response, courses[choice_id]["id"])
         t = threading.Thread(
             target=show_delay,
-            args=(user.active_sign, )
+            args=(user.quick_response, courses[choice_id]["id"])
         )
         t.start()
-        time.sleep(1)
+        time.sleep(config.QUICK_RESPONSE_INTERVAL)

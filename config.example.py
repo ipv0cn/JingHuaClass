@@ -8,7 +8,3 @@ PASSWORD = "您的密码"
 # 抢答配置
 QUICK_RESPONSE_INTERVAL = 0.1  # 抢答间隔（秒）
 QUICK_RESPONSE_THREADS = 10    # 并发线程数
-
-# 评价配置
-DEFAULT_FEEDBACK_SCORES = [5, 5, 5, 5]  # 默认评价分数
-DEFAULT_FEEDBACK_COMMENT = ""           # 默认评价内容

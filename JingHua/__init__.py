@@ -168,25 +168,3 @@ class User:
             f"{self.jinghua_url}/wechat-api/v1/class-attendance/active_sign"
         )
         return response.json()
-
-    # def sign_in(self, course_id: int, sign_id: int):
-    #     """
-    #     I don't know is it work
-    #     Response: [
-    #         {
-    #             # TODO: Comment
-    #         },
-    #         { ... }
-    #     ]
-    #     """
-    #     response = self.session.post(
-    #         f"{self.jinghua_url}"
-    #         "/wechat-api/v1/class-attendance/student-sign-in",
-    #         json={
-    #             "courseId": course_id,
-    #             "signId": sign_id,
-    #             "lat": "38.80331",
-    #             "lon": "113.910446"
-    #         }
-    #     )  # TODO: lat and lon
-    #     return response.text  # TODO: Maybe Always Json?
