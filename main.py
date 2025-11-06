@@ -53,6 +53,9 @@ if __name__ == "__main__":
             time.sleep(1)
             break
 
+    # print("\n")
+    # console.print(user.get_question_info(1762877))
+
     while True:
         t = threading.Thread(
             target=show_delay,

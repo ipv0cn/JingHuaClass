@@ -168,3 +168,118 @@ class User:
             f"{self.jinghua_url}/wechat-api/v1/class-attendance/active_sign"
         )
         return response.json()
+
+    def get_message(self) -> List[Dict[str, Any]]:
+        """
+        Response: [
+            {
+                "id":"68e60fe361273a293eff9d16",
+                "name":"王珏",
+                "avatar":"http://.../avatar.png",
+                "courseName":"公共英语1-信安2501",
+                "title":"关于第一次英语课的通知",
+                "content":"...",
+                "imgs":[],
+                "time":1759907811000,
+                "unreadcount":0
+            },
+            { ... }
+        ]
+        """
+        response = self.session.get(
+            f"{self.jinghua_url}/wechat-api/v1/students/notices/noticeSessions"
+        )
+        return response.json()
+
+    def get_class_question_list(self) -> List[Dict[str, Any]]:
+        """
+        Response: [
+            {
+                "courseId": 769887,
+                "name": "信息技术与人工智能-信安2501",
+                "code": "JF964",
+                "cover": "https://.../cover.png",
+                "teacherName": "魏旭",
+                "libraryId": 769964,
+                "questionNum": 0,
+                "paperNum": 0,
+                "openNum": 0
+            },
+            { ... }
+        ]
+        """
+        response = self.session.get(
+            f"{self.jinghua_url}/wechat-api/v3/students/courses"
+        )
+        return response.json()
+
+    def get_question_list(self, courseId: int, isOpen: bool = True,
+                          page: int = 0) -> Dict[str, Any]:
+        """
+        Response: {
+            "questionNum":3,
+            "paperNum":0,
+            "questions": [
+                {
+                    "id":1762878,
+                    "code":"T0002-1-1-1-1-1",
+                    "type":4,
+                    "difficulty":1,
+                    "isObjective":1,
+                    "content":"...",
+                    "status":1,
+                    "answerOpen":0,
+                    "onTime":0,
+                    "timingClose":null,
+                    "lastOpenTime":"2025-11-06T02:09:11.000Z",
+                    "isAnswered":1,
+                    "isCorrect":1
+                },
+                { ... }
+            ]
+        }
+        """
+        response = self.session.get(
+            f"{self.jinghua_url}/wechat-api/v3/students/questions",
+            params={
+                "courseId": courseId,
+                "isOpen": int(isOpen),
+                "page": page
+            }
+        )
+        return response.json()
+
+    def get_question_info(self, questionId: int) -> Dict[str, Any]:
+        """
+        Response: {
+            "id":1762878,
+            "code":"T0002-1-1-1-1-1",
+            "content":"...",
+            "type":4,
+            "difficulty":1,
+            "isObjective":1,
+            "blankNum":3,
+            "minChosen":null,
+            "maxChosen":null,
+            "status":1,
+            "answerOpen":0,
+            "reviewOpen":0,
+            "onTime":0,
+            "timingClose":null,
+            "lastOpenTime":"2025-11-06T02:09:11.000Z",
+            "isAnswered":1,
+            "isSet":0,
+            "summary":"",
+            "answerContent":[],
+            "answer":
+                [{"rank":0,"answer":"that"},
+                {"rank":1,"answer":"whose"},
+                {"rank":2,"answer":"mine"}],
+            "review":""
+        }
+        """
+        response = self.session.get(
+            f"{self.jinghua_url}/wechat-api/v3/students/questions"
+            f"/{questionId}",
+        )
+        return response.json()
